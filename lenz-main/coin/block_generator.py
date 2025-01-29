@@ -7,7 +7,7 @@ import json
 
 # Function to write to a block file
 def write_to_block_file(decoded_text, block_number):
-    block_file = f"C:/Users/vlad/OneDrive/Desktop/os/mint_tea/block/block_{block_number}.txt"
+    block_file = rf"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block\block_{block_number}.txt"
     with open(block_file, "a") as f:
         f.writelines(decoded_text)
     print(f"Done writing to {block_file}")
@@ -19,7 +19,7 @@ def count_block_files(directory):
     return len(block_files)
 
 # Example usage in your main loop
-directory = "C:/Users/vlad/OneDrive/Desktop/os/mint_tea/block"  # Update this to your directory path
+directory = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block"  # Update this to your directory path
 
 # Print the number of block_X.txt files in the directory
 num_block_files = count_block_files(directory)
@@ -32,7 +32,7 @@ start_time = time.time()
 # Random number generator loop
 while True:
     
-    # Seed generator loop creates six numbers generating raw data using the random module in python
+    # Seed generator loop creates six numbers
     x = []  # list
     for ii in range(6):
         A = random.randint(11, 99)
@@ -47,27 +47,39 @@ while True:
 
     # My table for seed generation
     ranZero = (a, b, c, d, e, f)
-    ranOne = (a + b + c + d + e + f)
-    ranTwo = (a + 1 + b + 2 + c + 3 + d + 4 + e + 5 + f + 6)
-    ranThree = (a + 1 + 3 + b + 2 + 5 + c + 3 + 7 + d + 4 + 11 + e + 5 + 13 + f + 6 + 17)
+    ranOne = a + b + c + d + e + f
+    ranTwo = a + 1 + b + 2 + c + 3 + d + 4 + e + 5 + f + 6
+    ranThree = a + 1 + 3 + b + 2 + 5 + c + 3 + 7 + d + 4 + 11 + e + 5 + 13 + f + 6 + 17
 
     # Create seeds
-    seedOne = str(ranOne * 16 * 2 ** 256)
-    seedTwo = str(ranTwo * 32 * 2 ** 256)
-    seedThr = str(ranThree * 64 * 2 ** 256)
+    seedOne = ranOne * 16 * 2 ** 256
+    seedTwo = ranTwo * 32 * 2 ** 256
+    seedThr = ranThree * 64 * 2 ** 256
 
-    # Generate seed values used in createing block data
-    seed_gen_16 = str(seedOne * 16 ** 256)    # Using this as a test block
+    # Generate seed values
+    seed_gen_16 = str(seedOne * 16 ** 256)
     seed_gen_32 = str(seedTwo * 32 ** 256)
     seed_gen_64 = str(seedThr * 64 ** 256)
 
     # SHA512 hash for the seed_gen
-    origin_seed = hashlib.sha512()
-    origin_seed.update(str(seed_gen_16).encode('utf-8'))
-    origin_seed.hexdigest()
-    hsh = origin_seed.hexdigest()
+    origin_seed_16 = hashlib.sha512()
+    origin_seed_16.update(str(seed_gen_16).encode('utf-8'))
+    origin_seed_16.hexdigest()
+    hsh_16 = origin_seed_16.hexdigest()
 
-    # Split and process seed_gen_16 into ASCII 
+        # SHA512 hash for the seed_gen
+    origin_seed_32 = hashlib.sha512()
+    origin_seed_32.update(str(seed_gen_32).encode('utf-8'))
+    origin_seed_32.hexdigest()
+    hsh_32 = origin_seed_32.hexdigest()
+
+        # SHA512 hash for the seed_gen
+    origin_seed_64 = hashlib.sha512()
+    origin_seed_64.update(str(seed_gen_64).encode('utf-8'))
+    origin_seed_64.hexdigest()
+    hsh_64 = origin_seed_64.hexdigest()
+
+    # Split and process seed_gen_16 into ASCII
     seed_gen_16 = str(seedOne * 16 ** 256)
     segment_width = 2  # ASCII values are 3 digits at most (0–127)
     segments = [seed_gen_16[i:i+segment_width] for i in range(0, len(seed_gen_16), segment_width)]
@@ -95,7 +107,7 @@ while True:
 
     # Determine the file name (block_0.txt, block_1.txt, etc.)
     block_number = 0
-    while os.path.exists(f"C:/Users/vlad/OneDrive/Desktop/os/mint_tea/block/block_{block_number}.txt"):
+    while os.path.exists(rf"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block\block_{block_number}.txt"):
         block_number += 1  # Increment block number if the file exists
 
     # Create a thread to handle writing to the block file
@@ -106,22 +118,25 @@ while True:
     print(f"There are {num_block_files} block_X.txt files in the directory.")
 
     # Write to seedgenTX.txt file
-    with open("C:/Users/vlad/OneDrive/Desktop/os/mint_tea/medusacoin/lenz-main/crypto/blockchain/seedgenTX.txt", 'w') as f:
+    with open(r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\seedgenTX.txt", 'w') as f:
         f.writelines("seedgen file number generator")
         f.writelines("\n")
         f.writelines("\n")
         f.writelines("seed_gen_16: ")
         f.writelines(seed_gen_16)
         f.writelines("\n")
+        f.writelines(origin_seed_16.hexdigest())
+        f.writelines("\n")
         f.writelines("seed_gen_32: ")
         f.writelines(seed_gen_32)
+        f.writelines("\n")
+        f.writelines(origin_seed_32.hexdigest())
         f.writelines("\n")
         f.writelines("seed_gen_64: ")
         f.writelines(seed_gen_64)
         f.writelines("\n")
         f.writelines("origin_seed : ")
-        f.writelines(origin_seed.hexdigest())
-        f.writelines("\n")
+        f.writelines(origin_seed_64.hexdigest())
         f.writelines("\n")
 
     print(f"done... please check the seedgenTX.txt")
@@ -131,7 +146,10 @@ while True:
     if elapsed_time >= duration:
         print("10 minutes have passed.")
         break
-        
+
+    # Wait for a short time before repeating the loop (optional)
+    time.sleep(1)
+
     # Function to count block_X.txt files and generate a list of their names
     def list_block_files(directory):
         # Get all files in the directory that match the pattern block_X.txt
@@ -155,11 +173,9 @@ while True:
         print(f"Block file list written to {json_file_path}")
 
     # Example usage in your main loop
-    directory = "C:/Users/vlad/OneDrive/Desktop/os/mint_tea/block"  # Update this to your directory path
-    json_file_path = "C:/Users/vlad/OneDrive/Desktop/os/mint_tea/block_files.json"  # Path to save the JSON file
-    # Wait for a short time before repeating the loop (optional)
-    
-    time.sleep(1)
+    directory = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block"  # Update this to your directory path
+    json_file_path = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block_files.json"  # Path to save the JSON file
+
     # Create and write the JSON file
     write_block_files_to_json(directory, json_file_path)
 
