@@ -1,7 +1,7 @@
 import os
 
 # Path to the shutdown signal file
-shutdown_file = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\shutdown.txt"
+shutdown_file = r"\coin\shutdown.txt"
 
 # Create the shutdown signal
 def trigger_shutdown():

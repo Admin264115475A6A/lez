@@ -3,8 +3,8 @@ import subprocess
 import time
 
 # Paths to the scripts and shutdown file
-shutdown_file = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\shutdown.txt"
-block_generator_script = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block_generator.py"
+shutdown_file = r"E:\coin\shutdown.txt"
+block_generator_script = r"E:\coin\block_generator.py"
 
 # Function to clean up shutdown signal before starting
 def clean_shutdown_signal():

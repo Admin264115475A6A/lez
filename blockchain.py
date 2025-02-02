@@ -146,16 +146,16 @@ class Blockchain:
             print(f"  Hash: {block.hash}")
             print('-' * 40)  # Print a separator for better readability
 
+    
 
 # Example usage
 if __name__ == "__main__":
-    directory = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\block"  # Adjust path as needed
+    directory = r"E:\coin\block"  # Adjust path as needed
 
     # Create a blockchain and load blocks from files
     blockchain = Blockchain(directory, difficulty=4)
     
-    # Print the number of blocks in the blockchain to confirm it's loaded
-    print(f"Blockchain contains {len(blockchain.chain)} blocks.")
+    
     # Validate specific blocks
     print(blockchain.validate_block(0))  # Validate Genesis Block
     print(blockchain.validate_block(1))  # Validate second block
@@ -170,5 +170,5 @@ if __name__ == "__main__":
     blockchain.print_all_blocks()
 
     # Export the blockchain to a JSON file
-    json_file_path = r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\blockchain.json"
+    json_file_path = r"E:\coin\blockchain.json"
     blockchain.save_to_json(json_file_path)

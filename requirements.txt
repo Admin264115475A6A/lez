@@ -1,0 +1,3 @@
+# requirements.txt
+
+# No external dependencies required. All dependencies are part of Python's standard library.

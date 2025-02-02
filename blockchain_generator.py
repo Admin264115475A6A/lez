@@ -11,13 +11,13 @@ from blockchain import Blockchain  # Import the Blockchain class from blockchain
 
 # Read paths from config.ini
 config = configparser.ConfigParser()
-config.read(r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\config.ini")
+config.read(r"E:\coin\config.ini")
 
 # Load paths from the configuration file
 directory = config.get('paths', 'directory')
 seedgen_file = config.get('paths', 'seedgen_file')
 json_file_path = config.get('paths', 'block_files_json')
-log_file = config.get('paths', 'log_file', fallback=r"C:\Users\vlad\OneDrive\Desktop\os\mint_tea\medusacoin\lenz-main\coin\error.log")
+log_file = config.get('paths', 'log_file', fallback=r"E:\coin\error.log")
 
 # Configure the logger
 logging.basicConfig(
